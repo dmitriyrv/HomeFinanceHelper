@@ -15,7 +15,7 @@ public class MainController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, value = "/first/{someInfo}")
-    public @ResponseBody String first(@PathVariable("someInfo") String info) {
+    public String first(@PathVariable("someInfo") String info) {
 
         return Main.main(info);
     }
