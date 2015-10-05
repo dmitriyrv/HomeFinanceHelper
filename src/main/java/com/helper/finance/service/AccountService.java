@@ -10,6 +10,7 @@ import java.util.List;
 public interface AccountService {
     void createAccount(AccountDto accountDto);
     void deleteAccount(AccountDto accountDto);
+
     //TODO: update functionality
 
     List<AccountDto> getAllAccounts();

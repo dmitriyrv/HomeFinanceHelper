@@ -1,7 +1,7 @@
 package com.helper.finance.dto;
 
 /**
- * Created by dvas on 01.10.2015.
+ * Created by Dmitriy Vasiliev on 01.10.2015.
  */
 public class AccountDto {
 
@@ -10,14 +10,16 @@ public class AccountDto {
     private String name;
     private String type;
     private String currency;
+    private String userId;
 
     public AccountDto(){}
 
-    public AccountDto(String number, String name, String type, String currency){
+    public AccountDto(String number, String name, String type, String currency, String userId){
         this.number = number;
         this.name = name;
         this.type = type;
         this.currency = currency;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -58,6 +60,14 @@ public class AccountDto {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

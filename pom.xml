@@ -27,6 +27,7 @@
         <mockito.version>1.9.5</mockito.version>
         <jackson.version>2.0.2</jackson.version>
         <spring-data-mongodb.version>1.8.0.RELEASE</spring-data-mongodb.version>
+        <commons-codec.version>1.9</commons-codec.version>
     </properties>
     <dependencies>
         <dependency>
@@ -77,6 +78,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+
 
     </dependencies>
     <repositories>

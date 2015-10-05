@@ -13,13 +13,16 @@ public class Account {
     private String name;
     private String type;
     private String currency;
+    private String userId;
 
     public Account(){}
 
-    public Account(String name, String type, String currency){
+    public Account(String number, String name, String type, String currency, String userId){
+        this.number = number;
         this.name = name;
         this.type = type;
         this.currency = currency;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -60,6 +63,14 @@ public class Account {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

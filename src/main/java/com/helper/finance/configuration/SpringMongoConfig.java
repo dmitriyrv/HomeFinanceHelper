@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
 /**
- * Created by dvas on 01.10.2015.
+ * Created by Dmitriy Vasiliev on 01.10.2015.
  */
 @Configuration
 public class SpringMongoConfig extends AbstractMongoConfiguration {
