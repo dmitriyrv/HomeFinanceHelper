@@ -11,7 +11,7 @@ public interface AccountService {
     void createAccount(AccountDto accountDto);
     void deleteAccount(AccountDto accountDto);
 
-    //TODO: update functionality
+    //TODO: update functionality and...
 
     List<AccountDto> getAllAccounts();
     AccountDto getAccountsByNumber(String accountNumber);
