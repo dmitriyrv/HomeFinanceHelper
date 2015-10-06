@@ -25,7 +25,7 @@
         <servlet.version>3.1.0</servlet.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
-        <jackson.version>2.0.2</jackson.version>
+        <jackson.version>2.1.0</jackson.version>
         <spring-data-mongodb.version>1.8.0.RELEASE</spring-data-mongodb.version>
         <commons-codec.version>1.9</commons-codec.version>
     </properties>

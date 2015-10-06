@@ -7,7 +7,10 @@ import com.helper.finance.model.mongodb.repository.UserRepository;
 import com.helper.finance.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -19,10 +22,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private MongoOperations mongoOperations;
+
     @Override
     public void createUser(UserDto newUser) {
-        if (userRepository.findByEmailAndActive(newUser.getEmail(), true) != null) {
-            newUser.setId("");
+        if (userRepository.findByEmailAndActive(newUser.getEmail(), true) == null) {
+            newUser.setId(null); //to let MongoDB create autoID
             newUser.setPassword(DigestUtils.sha512Hex(newUser.getPassword()));
             userRepository.save(UserDtoConverter.convertToModel(newUser));
         }
@@ -57,5 +63,11 @@ public class UserServiceImpl implements UserService {
             return true;
 
         return false;
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+       List<User> users = userRepository.findAll();
+        return UserDtoConverter.convertListToDtos(users);
     }
 }
