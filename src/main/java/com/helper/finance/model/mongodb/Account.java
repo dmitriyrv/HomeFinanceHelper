@@ -3,7 +3,7 @@ package com.helper.finance.model.mongodb;
 import org.springframework.data.annotation.Id;
 
 /**
- * Created by dvas on 01.10.2015.
+ * Created by Dmitriy Vasiliev on 01.10.2015. 
  */
 public class Account {
 
