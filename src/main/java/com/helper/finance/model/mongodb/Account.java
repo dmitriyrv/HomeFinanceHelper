@@ -1,10 +1,12 @@
 package com.helper.finance.model.mongodb;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by Dmitriy Vasiliev on 01.10.2015. 
  */
+@Document(collection = "account")
 public class Account {
 
     @Id
@@ -13,6 +15,7 @@ public class Account {
     private String name;
     private String type;
     private String currency;
+    private String description;
     private String userId;
 
     public Account(){}
@@ -63,6 +66,14 @@ public class Account {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUserId() {

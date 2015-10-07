@@ -10,6 +10,7 @@ public class AccountDto {
     private String name;
     private String type;
     private String currency;
+    private String description;
     private String userId;
 
     public AccountDto(){}
@@ -60,6 +61,14 @@ public class AccountDto {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUserId() {

@@ -1,6 +1,7 @@
 package com.helper.finance.service;
 
 import com.helper.finance.dto.AccountDto;
+import com.helper.finance.dto.UserDto;
 
 import java.util.List;
 
@@ -8,13 +9,10 @@ import java.util.List;
  * Created by Dmitriy Vasiliev on 01.10.2015.
  */
 public interface AccountService {
-    void createAccount(AccountDto accountDto);
-    void deleteAccount(AccountDto accountDto);
+    AccountDto createAccount(AccountDto accountDto);
+    void updateAccount(AccountDto newAccount);
+    List<AccountDto> getUserAccounts(String userId);
 
-    //TODO: update functionality and...
-
-    List<AccountDto> getAllAccounts();
-    AccountDto getAccountsByNumber(String accountNumber);
 
 
 }

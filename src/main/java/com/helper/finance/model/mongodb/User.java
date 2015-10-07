@@ -3,11 +3,10 @@ package com.helper.finance.model.mongodb;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.annotation.Generated;
-
 /**
  * Created by Dmitriy Vasiliev on 05.10.2015.
  */
+
 @Document(collection = "user")
 public class User {
 

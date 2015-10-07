@@ -5,8 +5,11 @@ import com.helper.finance.dto.converters.UserDtoConverter;
 import com.helper.finance.model.mongodb.User;
 import com.helper.finance.model.mongodb.repository.UserRepository;
 import com.helper.finance.service.UserService;
+import com.mongodb.Mongo;
+import com.mongodb.MongoException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +29,22 @@ public class UserServiceImpl implements UserService {
     private MongoOperations mongoOperations;
 
     @Override
-    public void createUser(UserDto newUser) {
-        if (userRepository.findByEmailAndActive(newUser.getEmail(), true) == null) {
-            newUser.setId(null); //to let MongoDB create autoID
-            newUser.setPassword(DigestUtils.sha512Hex(newUser.getPassword()));
-            userRepository.save(UserDtoConverter.convertToModel(newUser));
+    public UserDto createUser(UserDto newUserDto) {
+        User newUser;
+        try {
+            newUser = userRepository.findByEmailAndActive(newUserDto.getEmail(), true);
+            if (newUser == null) {
+
+                newUserDto.setId(null); //to let MongoDB create autoID
+                newUserDto.setPassword(DigestUtils.sha512Hex(newUserDto.getPassword()));
+                newUser = userRepository.save(UserDtoConverter.convertToModel(newUserDto));
+
+            }
+        } catch (DataAccessResourceFailureException e) {
+            throw new IllegalStateException();
         }
+
+        return UserDtoConverter.convertToDto(newUser);
     }
 
     @Override
@@ -59,15 +72,32 @@ public class UserServiceImpl implements UserService {
 
         User userToAuthenticate = userRepository.findByEmailAndActive(email, true);
 
-        if (userToAuthenticate != null && (userToAuthenticate.getPassword()).equals(DigestUtils.sha512Hex(password)))
-            return true;
+        return userToAuthenticate != null && (userToAuthenticate.getPassword()).equals(DigestUtils.sha512Hex(password));
 
-        return false;
+    }
+
+    @Override
+    public boolean userExists(String userId) {
+        User user = null;
+        try {
+            user = userRepository.findOne(userId);
+            if (user == null || !user.isActive())
+                return false;
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+
+        return (user != null);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
        List<User> users = userRepository.findAll();
         return UserDtoConverter.convertListToDtos(users);
+    }
+
+    @Override
+    public UserDto getUserById(String userId) {
+        return UserDtoConverter.convertToDto(userRepository.findOne(userId));
     }
 }

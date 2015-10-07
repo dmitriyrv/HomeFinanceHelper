@@ -27,6 +27,7 @@ public class UserDtoConverter {
     public static UserDto convertToDto(User user){
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(user, userDto);
+        userDto.setPassword("");
         return userDto;
     }
 
