@@ -80,7 +80,7 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o){
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
