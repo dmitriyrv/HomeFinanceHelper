@@ -1,5 +1,7 @@
 package com.helper.finance.dto;
 
+import java.util.Objects;
+
 /**
  * Created by Dmitriy Vasiliev on 05.10.2015.
  */
@@ -70,5 +72,22 @@ public class UserDto {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserDto)) return false;
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(active, userDto.active) &&
+                Objects.equals(email, userDto.email) &&
+                Objects.equals(firstName, userDto.firstName) &&
+                Objects.equals(lastName, userDto.lastName) &&
+                Objects.equals(password, userDto.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, firstName, lastName, password, active);
     }
 }

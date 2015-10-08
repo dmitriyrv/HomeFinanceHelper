@@ -1,7 +1,6 @@
 package com.helper.finance.service;
 
 import com.helper.finance.dto.AccountDto;
-import com.helper.finance.dto.UserDto;
 
 import java.util.List;
 
@@ -12,7 +11,4 @@ public interface AccountService {
     AccountDto createAccount(AccountDto accountDto);
     void updateAccount(AccountDto newAccount);
     List<AccountDto> getUserAccounts(String userId);
-
-
-
 }

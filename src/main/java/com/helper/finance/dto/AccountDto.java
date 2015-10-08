@@ -1,5 +1,7 @@
 package com.helper.finance.dto;
 
+import java.util.Objects;
+
 /**
  * Created by Dmitriy Vasiliev on 01.10.2015.
  */
@@ -83,20 +85,18 @@ public class AccountDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AccountDto)) return false;
-
         AccountDto that = (AccountDto) o;
-
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        return !(currency != null ? !currency.equals(that.currency) : that.currency != null);
-
+        return Objects.equals(number, that.number) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(currency, that.currency) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
-        return result;
+        return Objects.hash(number, name, type, currency, description, userId);
     }
+
 }

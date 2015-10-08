@@ -10,10 +10,8 @@ import java.util.List;
 public interface UserService {
 
     UserDto createUser(UserDto newUser);
-    void deleteUser(UserDto user);
     void updateUser( UserDto newUser);
-
-    UserDto getUserById(String userId);
+UserDto getUserById(String userId);
 
     void changeUserActiveState(UserDto user, boolean newState);
 

@@ -28,8 +28,15 @@
         <jackson.version>2.1.0</jackson.version>
         <spring-data-mongodb.version>1.8.0.RELEASE</spring-data-mongodb.version>
         <commons-codec.version>1.9</commons-codec.version>
+        <guava.version>r05</guava.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>

@@ -3,6 +3,8 @@ package com.helper.finance.model.mongodb;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 /**
  * Created by Dmitriy Vasiliev on 01.10.2015. 
  */
@@ -88,21 +90,18 @@ public class Account {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Account)) return false;
-
         Account account = (Account) o;
-
-        if (name != null ? !name.equals(account.name) : account.name != null) return false;
-        if (type != null ? !type.equals(account.type) : account.type != null) return false;
-        return !(currency != null ? !currency.equals(account.currency) : account.currency != null);
-
+        return Objects.equals(number, account.number) &&
+                Objects.equals(name, account.name) &&
+                Objects.equals(type, account.type) &&
+                Objects.equals(currency, account.currency) &&
+                Objects.equals(description, account.description) &&
+                Objects.equals(userId, account.userId);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
-        return result;
+        return Objects.hash(number, name, type, currency, description, userId);
     }
 
     @Override
