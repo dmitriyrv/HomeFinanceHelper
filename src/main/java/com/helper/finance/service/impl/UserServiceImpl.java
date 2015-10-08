@@ -5,11 +5,8 @@ import com.helper.finance.dto.converters.UserDtoConverter;
 import com.helper.finance.model.mongodb.User;
 import com.helper.finance.model.mongodb.repository.UserRepository;
 import com.helper.finance.service.UserService;
-import com.mongodb.Mongo;
-import com.mongodb.MongoException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
@@ -30,19 +27,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto newUserDto) {
-        User newUser;
-        try {
-            newUser = userRepository.findByEmailAndActive(newUserDto.getEmail(), true);
-            if (newUser == null) {
+        User newUser = userRepository.findByEmailAndActive(newUserDto.getEmail(), true);
 
-                newUserDto.setId(null); //to let MongoDB create autoID
-                newUserDto.setPassword(DigestUtils.sha512Hex(newUserDto.getPassword()));
-                newUser = userRepository.save(UserDtoConverter.convertToModel(newUserDto));
+        if (newUser == null) {
 
-            }
-        } catch (DataAccessResourceFailureException e) {
-            throw new IllegalStateException();
+            newUserDto.setId(null); //to let MongoDB create autoID
+            newUserDto.setPassword(DigestUtils.sha512Hex(newUserDto.getPassword()));
+            newUser = userRepository.save(UserDtoConverter.convertToModel(newUserDto));
+
+        } else {
+            throw new IllegalArgumentException(String.format("Active user with Email '%s' already exists.", newUserDto.getEmail()));
         }
+
 
         return UserDtoConverter.convertToDto(newUser);
     }
@@ -78,26 +74,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean userExists(String userId) {
-        User user = null;
-        try {
-            user = userRepository.findOne(userId);
-            if (user == null || !user.isActive())
-                return false;
-        } catch (MongoException e) {
-            e.printStackTrace();
-        }
 
-        return (user != null);
+        return (userRepository.findByIdAndActive(userId, true) != null);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
-       List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAll();
         return UserDtoConverter.convertListToDtos(users);
     }
 
     @Override
     public UserDto getUserById(String userId) {
-        return UserDtoConverter.convertToDto(userRepository.findOne(userId));
+        return UserDtoConverter.convertToDto(userRepository.findByIdAndActive(userId, true));
     }
 }

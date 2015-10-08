@@ -20,27 +20,19 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount(@RequestBody AccountDto newAccountDto){
-        try {
+    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto newAccountDto) {
+
             AccountDto createdAccountDto = accountService.createAccount(newAccountDto);
             return new ResponseEntity<>(createdAccountDto, HttpStatus.OK);
-        } catch (IllegalStateException ise){
-            return new ResponseEntity<>("Database unreachable", HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (IllegalArgumentException iae){
-            return new ResponseEntity<>(iae.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Object> getUserAccounts(@RequestParam String userId){
-        try {
-            List<AccountDto> userAccountDtos = accountService.getUserAccounts(userId);
+
+        List<AccountDto> userAccountDtos = accountService.getUserAccounts(userId);
             return new ResponseEntity<>(userAccountDtos, HttpStatus.OK);
-        } catch (IllegalStateException ise){
-            return new ResponseEntity<>("Database unreachable", HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (IllegalArgumentException iae){
-            return new ResponseEntity<>(iae.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+
     }
 
 
