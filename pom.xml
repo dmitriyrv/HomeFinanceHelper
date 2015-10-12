@@ -29,8 +29,22 @@
         <spring-data-mongodb.version>1.8.0.RELEASE</spring-data-mongodb.version>
         <commons-codec.version>1.9</commons-codec.version>
         <guava.version>r05</guava.version>
+        <hibernate.version>5.0.2.Final</hibernate.version>
+        <mysql.version>5.1.36</mysql.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
