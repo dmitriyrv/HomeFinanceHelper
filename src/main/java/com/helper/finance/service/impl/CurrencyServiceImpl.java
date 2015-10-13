@@ -23,7 +23,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     public CurrencyDto addCurrency(CurrencyDto currencyDto) {
         //TODO: Add nonexistent user handling
         Currency newCurrency = CurrencyDtoConverter.convertToModel(currencyDto);
-        return CurrencyDtoConverter.convertToDto(currencyRepository.save(newCurrency));
+        return CurrencyDtoConverter.convertToDto(currencyRepository.addCurrency(newCurrency));
     }
 
     @Override

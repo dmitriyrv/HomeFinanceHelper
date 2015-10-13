@@ -30,5 +30,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <import resource="hibernate-context.xml" />
+
 
 </beans>

@@ -1,6 +1,7 @@
 package com.helper.finance.model.mysql;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Dmitriy Vasiliev on 13.10.2015.
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "currencies", catalog = "financehelper", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id")})
-public class Currency {
+public class Currency implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
