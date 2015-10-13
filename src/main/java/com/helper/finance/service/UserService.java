@@ -11,7 +11,7 @@ public interface UserService {
 
     UserDto createUser(UserDto newUser);
     void updateUser( UserDto newUser);
-UserDto getUserById(String userId);
+    UserDto getUserById(String userId);
 
     void changeUserActiveState(UserDto user, boolean newState);
 

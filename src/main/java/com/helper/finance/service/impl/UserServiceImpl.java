@@ -54,11 +54,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(UserDto user) {
-
-    }
-
-    @Override
     public void updateUser(UserDto newUser) {
         Preconditions.checkArgument(newUser != null, "User should not be null.");
         if (userRepository.exists(newUser.getId())){
