@@ -5,10 +5,9 @@ import com.helper.finance.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by Dmitriy Vasiliev on 13.10.2015.
@@ -26,6 +25,12 @@ public class CurrencyController {
         CurrencyDto createdCurrencyDto = currencyService.addCurrency(newCurrencyDto);
         return new ResponseEntity<>(createdCurrencyDto, HttpStatus.OK);
 
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/list")
+    public ResponseEntity<Object> getUserCurrenciesList(@RequestParam Integer userId){
+        List<CurrencyDto> userCurrencies = currencyService.getUserCurrencies(userId);
+        return new ResponseEntity<>(userCurrencies, HttpStatus.OK);
     }
 
 }
