@@ -79,7 +79,7 @@ public class UserDto {
         if (this == o) return true;
         if (!(o instanceof UserDto)) return false;
         UserDto userDto = (UserDto) o;
-        return Objects.equals(active, userDto.active) &&
+        return  Objects.equals(active, userDto.active) &&
                 Objects.equals(email, userDto.email) &&
                 Objects.equals(firstName, userDto.firstName) &&
                 Objects.equals(lastName, userDto.lastName) &&

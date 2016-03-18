@@ -20,7 +20,11 @@ public class UserDtoConverter {
 
     public static List<User> convertListToModels(List<UserDto> userDtos){
         List<User> users = new ArrayList<>();
-        userDtos.forEach(userDto -> users.add(UserDtoConverter.convertToModel(userDto)));
+
+        for(UserDto usrDto : userDtos){
+            users.add(UserDtoConverter.convertToModel(usrDto));
+        }
+
         return users;
     }
 
@@ -33,7 +37,11 @@ public class UserDtoConverter {
 
     public static List<UserDto> convertListToDtos(List<User> users){
         List<UserDto> userDtos = new ArrayList<>();
-        users.forEach(user -> userDtos.add(UserDtoConverter.convertToDto(user)));
+
+        for(User usr : users){
+            userDtos.add(UserDtoConverter.convertToDto(usr));
+        }
+
         return userDtos;
     }
 

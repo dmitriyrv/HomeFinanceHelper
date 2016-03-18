@@ -30,7 +30,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ResponseEntity<Object> getAllUsers(){
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        return new ResponseEntity<Object>(userService.getAllUsers(), HttpStatus.OK);
     }
 
 }

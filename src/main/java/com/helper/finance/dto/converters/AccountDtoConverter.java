@@ -19,7 +19,11 @@ public class AccountDtoConverter {
 
     public static List<Account> convertListToModels(List<AccountDto> accountDtos){
         List<Account> accounts = new ArrayList<>();
-        accountDtos.forEach(accountDto -> accounts.add(AccountDtoConverter.convertToModel(accountDto)));
+
+        for (AccountDto accDto : accountDtos ) {
+            accounts.add(AccountDtoConverter.convertToModel(accDto));
+        }
+
         return accounts;
     }
 
@@ -31,7 +35,11 @@ public class AccountDtoConverter {
 
     public static List<AccountDto> convertListToDtos(List<Account> accounts){
         List<AccountDto> accountDtos = new ArrayList<>();
-        accounts.forEach(account -> accountDtos.add(AccountDtoConverter.convertToDto(account)));
+
+        for (Account acc : accounts) {
+            accountDtos.add(AccountDtoConverter.convertToDto(acc));
+        }
+
         return accountDtos;
     }
 }

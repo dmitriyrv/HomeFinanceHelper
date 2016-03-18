@@ -19,7 +19,11 @@ public class CurrencyDtoConverter {
 
     public static List<Currency> convertListToModels(List<CurrencyDto> currencyDtos){
         List<Currency> currencies = new ArrayList<>();
-        currencyDtos.forEach(currencyDto -> currencies.add(CurrencyDtoConverter.convertToModel(currencyDto)));
+
+        for(CurrencyDto currDto: currencyDtos){
+            currencies.add(CurrencyDtoConverter.convertToModel(currDto));
+        }
+
         return currencies;
     }
 
@@ -31,7 +35,11 @@ public class CurrencyDtoConverter {
 
     public static List<CurrencyDto> convertListToDtos(List<Currency> currencies){
         List<CurrencyDto> currencyDtos = new ArrayList<>();
-        currencies.forEach(currency -> currencyDtos.add(CurrencyDtoConverter.convertToDto(currency)));
+
+        for(Currency curr : currencies){
+            currencyDtos.add(CurrencyDtoConverter.convertToDto(curr));
+        }
+
         return currencyDtos;
     }
 }
