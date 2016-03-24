@@ -15,6 +15,7 @@ public class MainController {
     @RequestMapping(method = RequestMethod.GET, value = "/first/{someInfo}")
     public String first(@PathVariable("someInfo") String info) {
 
+
         return Main.main(info);
     }
 }
