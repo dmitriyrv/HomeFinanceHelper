@@ -2,20 +2,25 @@ package com.helper.finance.controller;
 
 import com.helper.finance.Main;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.Date;
 
 /**
  * Created by Iryna_Vasilyeva on 9/11/2015.
  */
-@RestController
-@RequestMapping("/")
+@Controller
 public class MainController {
 
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET, value = "/first/{someInfo}")
-    public String first(@PathVariable("someInfo") String info) {
 
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public String root(Model model) {
 
-        return Main.main(info);
+        model.addAttribute("currentTime", (new Date()).toString());
+
+        return "index";
     }
 }
