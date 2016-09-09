@@ -19,7 +19,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    /*@RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto newAccountDto) {
 
             AccountDto createdAccountDto = accountService.createAccount(newAccountDto);
@@ -33,7 +33,7 @@ public class AccountController {
         List<AccountDto> userAccountDtos = accountService.getUserAccounts(userId);
             return new ResponseEntity<>(userAccountDtos, HttpStatus.OK);
 
-    }
+    }*/
 
 
 

@@ -1,16 +1,9 @@
 package com.helper.finance.service.impl;
 
-import com.google.common.base.Preconditions;
-import com.helper.finance.dto.AccountDto;
-import com.helper.finance.dto.converters.AccountDtoConverter;
-import com.helper.finance.model.mongodb.Account;
-import com.helper.finance.model.mongodb.repository.AccountRepository;
 import com.helper.finance.service.AccountService;
 import com.helper.finance.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by Dmitriy Vasiliev on 01.10.2015.
@@ -18,21 +11,20 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    @Autowired
-    private AccountRepository accountRepository;
+
     @Autowired
     private UserService userService;
 
-    @Override
+    /*@Override
     public AccountDto createAccount(AccountDto accountDto) {
-        /*Preconditions.checkArgument(accountDto != null, "Account should not be null");
+        *//*Preconditions.checkArgument(accountDto != null, "Account should not be null");
 
         if (!userService.userExists(accountDto.getUserId()))
             throw new IllegalArgumentException(String.format("User with id '%s' does not exist or inactive", accountDto.getUserId()));
 
         Account newAccount = AccountDtoConverter.convertToModel(accountDto);
         newAccount.setId(null);
-        newAccount = accountRepository.save(newAccount);*/
+        newAccount = accountRepository.save(newAccount);*//*
 
         return null; // AccountDtoConverter.convertToDto(newAccount);
     }
@@ -50,10 +42,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountDto> getUserAccounts(String userId) {
 
-       /* if (!userService.userExists(userId))
-            throw new IllegalArgumentException(String.format("User with id '%s' does not exist or inactive", userId));*/
+       *//* if (!userService.userExists(userId))
+            throw new IllegalArgumentException(String.format("User with id '%s' does not exist or inactive", userId));*//*
 
         return AccountDtoConverter.convertListToDtos(accountRepository.findByUserId(userId));
 
-    }
+    }*/
 }
