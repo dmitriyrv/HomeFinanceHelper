@@ -8,10 +8,10 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "user", catalog = "financehelper", uniqueConstraints = {
+@Table(name = "users", catalog = "financehelper", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id")
 })
-public class UserJPA implements Serializable {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +33,10 @@ public class UserJPA implements Serializable {
     @Column(name = "active")
     private boolean active;
 
-    public UserJPA() {
+    public User() {
     }
 
-    public UserJPA(Integer id, String email, String firstName, String lastName, String password, boolean active) {
+    public User(Integer id, String email, String firstName, String lastName, String password, boolean active) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;

@@ -1,6 +1,6 @@
 package com.helper.finance.controller;
 
-import com.helper.finance.Main;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +16,6 @@ public class MainController {
     public String first(@PathVariable("someInfo") String info) {
 
 
-        return Main.main(info);
+        return null;
     }
 }

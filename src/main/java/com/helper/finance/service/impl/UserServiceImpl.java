@@ -3,11 +3,13 @@ package com.helper.finance.service.impl;
 import com.google.common.base.Preconditions;
 import com.helper.finance.dto.UserDto;
 import com.helper.finance.dto.converters.UserDtoConverter;
-import com.helper.finance.model.mongodb.User;
-import com.helper.finance.model.mongodb.repository.UserRepository;
+//import com.helper.finance.model.mongodb.User;
+//import com.helper.finance.model.mongodb.repository.UserRepository;
+import com.helper.finance.model.mysql.repository.UserRepository;
 import com.helper.finance.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +23,25 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    @Qualifier(value = "com.helper.finance.model.mysql.repository.impl.UserRepositoryImpl")
     private UserRepository userRepository;
 
-    @Autowired
-    private MongoOperations mongoOperations;
+
+
+    /*@Autowired
+    private MongoOperations mongoOperations;*/
 
     @Override
+    public UserDto getUserInfo(String email) {
+
+        Preconditions.checkArgument(email != null, "Email should not be null.");
+
+        com.helper.finance.model.mysql.User user = userRepository.getUserInfo(email);
+
+        return UserDtoConverter.convertToDto(user);
+    }
+
+    /*@Override
     public UserDto createUser(UserDto newUserDto) {
         Preconditions.checkArgument(newUserDto != null, "User should not be null.");
 
@@ -85,5 +100,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(String userId) {
         return UserDtoConverter.convertToDto(userRepository.findByIdAndActive(userId, true));
-    }
+    }*/
 }

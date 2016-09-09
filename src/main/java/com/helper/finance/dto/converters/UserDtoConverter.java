@@ -31,6 +31,13 @@ public class UserDtoConverter {
         return userDto;
     }
 
+    public static UserDto convertToDto(com.helper.finance.model.mysql.User user){
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(user, userDto);
+        userDto.setPassword("");
+        return userDto;
+    }
+
     public static List<UserDto> convertListToDtos(List<User> users){
         List<UserDto> userDtos = new ArrayList<>();
         users.forEach(user -> userDtos.add(UserDtoConverter.convertToDto(user)));

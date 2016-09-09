@@ -8,15 +8,16 @@ import java.util.List;
  * Created by Dmitriy Vasiliev on 05.10.2015.
  */
 public interface UserService {
-
-    UserDto createUser(UserDto newUser);
+    UserDto getUserInfo(String email);
+    /*UserDto createUser(UserDto newUser);
     void updateUser( UserDto newUser);
     UserDto getUserById(String userId);
+
 
     void changeUserActiveState(UserDto user, boolean newState);
 
     boolean authenticateUser(String email, String password);
     boolean userExists(String userId);
 
-    List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers();*/
 }

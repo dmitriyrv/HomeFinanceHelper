@@ -25,16 +25,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto createAccount(AccountDto accountDto) {
-        Preconditions.checkArgument(accountDto != null, "Account should not be null");
+        /*Preconditions.checkArgument(accountDto != null, "Account should not be null");
 
         if (!userService.userExists(accountDto.getUserId()))
             throw new IllegalArgumentException(String.format("User with id '%s' does not exist or inactive", accountDto.getUserId()));
 
         Account newAccount = AccountDtoConverter.convertToModel(accountDto);
         newAccount.setId(null);
-        newAccount = accountRepository.save(newAccount);
+        newAccount = accountRepository.save(newAccount);*/
 
-        return AccountDtoConverter.convertToDto(newAccount);
+        return null; // AccountDtoConverter.convertToDto(newAccount);
     }
 
     @Override
@@ -50,8 +50,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountDto> getUserAccounts(String userId) {
 
-        if (!userService.userExists(userId))
-            throw new IllegalArgumentException(String.format("User with id '%s' does not exist or inactive", userId));
+       /* if (!userService.userExists(userId))
+            throw new IllegalArgumentException(String.format("User with id '%s' does not exist or inactive", userId));*/
 
         return AccountDtoConverter.convertListToDtos(accountRepository.findByUserId(userId));
 
