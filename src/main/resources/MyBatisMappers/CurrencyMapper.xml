@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.helper.db.CurrencyDao">
+
+    <resultMap id="CurrencyResult" type="Currency">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id"/>
+        <result property="shortName" column="short_name"/>
+        <result property="fullName" column="full_name"/>
+        <result property="primaryCurrencyId" column="primary_curr_id"/>
+        <result property="rateToPrimary" column="rate_to_primary"/>
+    </resultMap>
+
+    <insert id = "addCurrency" parameterType = "Currency" >
+        INSERT INTO currencies (user_id, short_name, full_name, primary_curr_id, rate_to_primary) VALUES (#{userId},#{shortName},#{fullName},#{primaryCurrencyId},#{rateToPrimary});
+    </insert>
+
+    <select id="getAllCurrencies" resultMap="CurrencyResult">
+        SELECT id, user_id, short_name, full_name, primary_curr_id, rate_to_primary FROM currencies;
+    </select>
+    
+    <select id="getCurrencyById" parameterType="int" resultMap="CurrencyResult">
+        SELECT id, user_id, short_name, full_name, primary_curr_id, rate_to_primary FROM currencies WHERE id = #{id};
+    </select>
+
+</mapper>

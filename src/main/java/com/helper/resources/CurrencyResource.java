@@ -1,15 +1,13 @@
 package com.helper.resources;
 
-import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.Timed;
 import com.helper.core.Currency;
-import com.helper.db.CurrencyDao;
-import com.helper.exceptions.ResponseException;
+import com.helper.service.CurrencyService;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Created by dvas on 27.10.2016.
@@ -19,26 +17,38 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CurrencyResource {
     
-    private final CurrencyDao currencyDao;
     
-    public CurrencyResource (CurrencyDao currencyDao) {
-        this.currencyDao = currencyDao;
+    private final CurrencyService currencyService;
+    
+    public CurrencyResource (CurrencyService currencyService) {
+        
+        this.currencyService = currencyService;
+    }
+    
+    @POST
+    @Path("/add")
+    @Timed
+    @UnitOfWork
+    public void addCurrency(Currency currency){
+        
+        currencyService.insertCurrency(currency);
+        
     }
     
     @GET
-    @Path("/{id}")
+    @Path("/get/{id}")
     @Timed
     @UnitOfWork
-    @ExceptionMetered
-    public Currency getCurrency(@PathParam("id") String id){
-        
-        Currency existingCurrency =currencyDao.retrieve(id);
-        
-        if (existingCurrency == null){
-            ResponseException.formatAndThrow(Response.Status.NOT_FOUND, "Currency with id " + id + " does not exist");
-        }
-        
-        return existingCurrency;
+    public Currency getById(@PathParam("id") int id){
+        return currencyService.getCurrency(id);
+    }
+    
+    @GET
+    @Path("/get/all")
+    @Timed
+    @UnitOfWork
+    public List<Currency> getCurrencies(){
+        return currencyService.getAllCurrencies();
     }
     
 }

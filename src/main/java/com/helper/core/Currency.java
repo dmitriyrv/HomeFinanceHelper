@@ -1,31 +1,25 @@
 package com.helper.core;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.NotEmpty;
-
 /**
  * Created by dvas on 27.10.2016.
  */
 public class Currency {
-    @JsonProperty
+    
     private int id;
-    
-    @JsonProperty
     private int userId;
-    
-    @JsonProperty
-    @NotEmpty
     private String shortName;
-    
-    @JsonProperty
-    @NotEmpty
     private String fullName;
-    
-    @JsonProperty
     private int primaryCurrencyId;
-    
-    @JsonProperty
     private float rateToPrimary;
+    
+    public Currency (int id, int userId, String shortName, String fullName, int primaryCurrencyId, float rateToPrimary) {
+        this.id = id;
+        this.userId = userId;
+        this.shortName = shortName;
+        this.fullName = fullName;
+        this.primaryCurrencyId = primaryCurrencyId;
+        this.rateToPrimary = rateToPrimary;
+    }
     
     public Currency () {
     }

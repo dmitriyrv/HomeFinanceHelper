@@ -12,20 +12,20 @@ server:
     port: 9001
 
 database:
-  # the name of your JDBC driver
+#  # the name of your JDBC driver
   driverClass: com.mysql.cj.jdbc.Driver
-
- # the JDBC URL
+#
+# # the JDBC URL
   url: jdbc:mysql://localhost:3306/financehelper
-
-  # the username
+#
+#  # the username
   user: root
-
-  # the password
+#
+#  # the password
   password: ytrewq
-
-  # any properties specific to your JDBC driver:
-  properties:
-    charSet: UTF-8
-    hibernate.dialect: org.hibernate.dialect.MySQLDialect  #org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate.hbm2ddl.auto: create
+#
+#  # any properties specific to your JDBC driver:
+#  properties:
+#    charSet: UTF-8
+#    hibernate.dialect: org.hibernate.dialect.MySQLDialect  #org.hibernate.dialect.MySQL5InnoDBDialect
+#    hibernate.hbm2ddl.auto: create
