@@ -18,6 +18,8 @@ import java.util.List;
 public class CurrencyResource {
     
     
+    
+    
     private final CurrencyService currencyService;
     
     public CurrencyResource (CurrencyService currencyService) {
@@ -29,9 +31,9 @@ public class CurrencyResource {
     @Path("/add")
     @Timed
     @UnitOfWork
-    public void addCurrency(Currency currency){
+    public Currency addCurrency(Currency currency){
         
-        currencyService.insertCurrency(currency);
+        return currencyService.getCurrency(currencyService.insertCurrency(currency));
         
     }
     
@@ -51,4 +53,7 @@ public class CurrencyResource {
         return currencyService.getAllCurrencies();
     }
     
+    public CurrencyService getCurrencyService () {
+        return currencyService;
+    }
 }

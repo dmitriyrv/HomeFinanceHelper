@@ -13,8 +13,11 @@
         <result property="rateToPrimary" column="rate_to_primary"/>
     </resultMap>
 
-    <insert id = "addCurrency" parameterType = "Currency" >
+    <insert id = "addCurrency" parameterType = "Currency" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO currencies (user_id, short_name, full_name, primary_curr_id, rate_to_primary) VALUES (#{userId},#{shortName},#{fullName},#{primaryCurrencyId},#{rateToPrimary});
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() as id
+        </selectKey>
     </insert>
 
     <select id="getAllCurrencies" resultMap="CurrencyResult">

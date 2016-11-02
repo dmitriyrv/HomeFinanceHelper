@@ -4,6 +4,7 @@ import com.helper.core.Currency;
 import com.helper.db.CurrencyDao;
 import com.helper.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
 
@@ -12,14 +13,22 @@ import java.util.List;
  */
 public class CurrencyService {
     
-    public void insertCurrency (Currency newCurrency){
-        SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+    private final SqlSessionFactory sessionFactory = MyBatisUtil.getSqlSessionFactory();
+    
+    public int insertCurrency (Currency newCurrency){
+        
+        if (newCurrency == null){
+            throw new IllegalArgumentException("Inserting currency should not be NULL");
+        }
+        
+        SqlSession sqlSession = sessionFactory.openSession();
         Currency createdCurrency = new Currency();
         
         try {
             CurrencyDao currencyDao = sqlSession.getMapper(CurrencyDao.class);
             currencyDao.addCurrency(newCurrency);
             sqlSession.commit();
+            return newCurrency.getId();
         } finally {
             sqlSession.close();
         }
@@ -27,7 +36,7 @@ public class CurrencyService {
     }
     
     public Currency getCurrency(int id){
-        SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+        SqlSession sqlSession = sessionFactory.openSession();
         
         try {
             CurrencyDao currencyDao = sqlSession.getMapper(CurrencyDao.class);
@@ -38,7 +47,7 @@ public class CurrencyService {
     }
     
     public List<Currency> getAllCurrencies(){
-        SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+        SqlSession sqlSession = sessionFactory.openSession();
         
         try {
             CurrencyDao currencyDao = sqlSession.getMapper(CurrencyDao.class);
