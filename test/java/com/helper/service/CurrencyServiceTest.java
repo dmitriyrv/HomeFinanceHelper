@@ -11,6 +11,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
+
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
@@ -21,8 +24,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class CurrencyServiceTest {
     
-    @InjectMocks
-    CurrencyService service;
+    
+    private CurrencyService service;
     
     @Mock
     SqlSessionFactory mockSessionFactory;
@@ -30,27 +33,37 @@ public class CurrencyServiceTest {
     SqlSession mockSqlSession;
     @Mock
     CurrencyDao mockCurrencyDao;
-    @Mock
-    Currency mockCurrency;
+    
+    Currency expectedCurrency;
+    
     
     @Before
     public void setUp () throws Exception {
+    
+        service = mock(CurrencyService.class);
+        
+        expectedCurrency = new Currency(42,42,"QQQ","WWW",42,1.2F);
+        
         when(mockSessionFactory.openSession()).thenReturn(mockSqlSession);
         when(mockSqlSession.getMapper(CurrencyDao.class)).thenReturn(mockCurrencyDao);
+        doNothing().when(mockCurrencyDao).addCurrency(new Currency());
+        when(mockCurrencyDao.getCurrencyById(42)).thenReturn(expectedCurrency);
         doNothing().when(mockSqlSession).commit(); //not sure if it is necessary
+        
+        
     }
     
     @After
     public void tearDown () throws Exception {
-        
+        expectedCurrency = null;
     }
     
     @Test
     public void insertCurrency () throws Exception {
-        doNothing().when(mockCurrencyDao).addCurrency(any(Currency.class));
-        when(service.insertCurrency(mockCurrency)).thenReturn(16);
         
-        assertEquals(16, service.insertCurrency(mockCurrency));
+        CurrencyService currencyService = new CurrencyService(mockSessionFactory);
+        
+        assertEquals(0, currencyService.insertCurrency(new Currency()));
         
     }
     
@@ -61,13 +74,17 @@ public class CurrencyServiceTest {
     
     @Test
     public void getCurrencyShouldReturnValidOutput () throws Exception {
-        Currency currency = service.getCurrency(9);
-        assertNotNull(currency);
+        
+        CurrencyService service = new CurrencyService(mockSessionFactory);
+        assertEquals(expectedCurrency, service.getCurrency(42));
+        
     }
     
     @Test
     public void getAllCurrencies () throws Exception {
         
     }
+    
+   
     
 }

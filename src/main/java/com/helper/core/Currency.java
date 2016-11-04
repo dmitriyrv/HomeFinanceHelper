@@ -71,4 +71,31 @@ public class Currency {
     public void setRateToPrimary (float rateToPrimary) {
         this.rateToPrimary = rateToPrimary;
     }
+    
+    @Override
+    public boolean equals (Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        Currency currency = (Currency) o;
+        
+        if (id != currency.id) return false;
+        if (userId != currency.userId) return false;
+        if (primaryCurrencyId != currency.primaryCurrencyId) return false;
+        if (Float.compare(currency.rateToPrimary, rateToPrimary) != 0) return false;
+        if (!shortName.equals(currency.shortName)) return false;
+        return fullName.equals(currency.fullName);
+    
+    }
+    
+    @Override
+    public int hashCode () {
+        int result = id;
+        result = 31 * result + userId;
+        result = 31 * result + shortName.hashCode();
+        result = 31 * result + fullName.hashCode();
+        result = 31 * result + primaryCurrencyId;
+        result = 31 * result + (rateToPrimary != +0.0f ? Float.floatToIntBits(rateToPrimary) : 0);
+        return result;
+    }
 }

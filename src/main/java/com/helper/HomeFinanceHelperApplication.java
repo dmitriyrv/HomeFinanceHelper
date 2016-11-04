@@ -3,10 +3,12 @@ package com.helper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.helper.resources.CurrencyResource;
 import com.helper.service.CurrencyService;
+import com.helper.util.MyBatisUtil;
 import io.dropwizard.Application;
 import io.dropwizard.jdbi.bundles.DBIExceptionsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 public class HomeFinanceHelperApplication extends Application<HomeFinanceHelperConfiguration> {
 
@@ -31,8 +33,8 @@ public class HomeFinanceHelperApplication extends Application<HomeFinanceHelperC
     public void run(final HomeFinanceHelperConfiguration configuration,
                     final Environment environment) throws ClassNotFoundException {
         
-        
-        final CurrencyService currencyService = new CurrencyService();
+        final SqlSessionFactory sessionFactory = MyBatisUtil.getSqlSessionFactory();
+        final CurrencyService currencyService = new CurrencyService(sessionFactory);
         
         /*
         *Add resources

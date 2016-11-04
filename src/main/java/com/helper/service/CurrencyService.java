@@ -13,7 +13,11 @@ import java.util.List;
  */
 public class CurrencyService {
     
-    private final SqlSessionFactory sessionFactory = MyBatisUtil.getSqlSessionFactory();
+    private SqlSessionFactory sessionFactory;
+    
+    public CurrencyService(SqlSessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
     
     public int insertCurrency (Currency newCurrency){
         
@@ -22,7 +26,7 @@ public class CurrencyService {
         }
         
         SqlSession sqlSession = sessionFactory.openSession();
-        Currency createdCurrency = new Currency();
+        
         
         try {
             CurrencyDao currencyDao = sqlSession.getMapper(CurrencyDao.class);
