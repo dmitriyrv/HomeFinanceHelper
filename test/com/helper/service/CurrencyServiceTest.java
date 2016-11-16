@@ -8,22 +8,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
-import java.util.List;
-
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 /**
  * Created by dvas on 02.11.2016.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class CurrencyServiceTest {
-    
     
     private CurrencyService service;
     
@@ -59,17 +54,19 @@ public class CurrencyServiceTest {
     }
     
     @Test
-    public void insertCurrency () throws Exception {
+    public void insertCurrencyShouldReturnValidOutput () throws Exception {
         
         CurrencyService currencyService = new CurrencyService(mockSessionFactory);
         
-        assertEquals(0, currencyService.insertCurrency(new Currency()));
+        assertEquals(42, currencyService.insertCurrency(expectedCurrency));
         
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void insertCurrencyShouldThrowExceptionForNullArgument () throws Exception {
-        service.insertCurrency(null);
+    
+        CurrencyService currencyService = new CurrencyService(mockSessionFactory);
+        currencyService.insertCurrency(null);
     }
     
     @Test

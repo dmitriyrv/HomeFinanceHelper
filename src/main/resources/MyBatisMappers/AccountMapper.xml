@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.helper.db.AccountDao">
+
+    <resultMap id="AccountResult" type="Account">
+
+        <id property="accountId" column="id"/>
+        <result property="typeId" column="acc_type"/>
+        <result property="name" column="acc_name"/>
+        <association property="currency" javaType="Currency">
+            <id property="id" column="id"/>
+            <result property="userId" column="user_id"/>
+            <result property="shortName" column="short_name"/>
+            <result property="fullName" column="full_name"/>
+            <result property="primaryCurrencyId" column="primary_curr_id"/>
+            <result property="rateToPrimary" column="rate_to_primary"/>
+        </association>
+    </resultMap>
+
+    <select id="getAccountById" parameterType="int" resultMap="AccountResult">
+        SELECT a.id, a.type, a.name, c.id, c.user_id, c.short_name, c.full_name, c.primary_curr_id, c.rate_to_primary
+        FROM accounts as a
+        LEFT JOIN currencies as c ON a.currency = c.id
+        WHERE a.id = #{id};
+    </select>
+
+    <insert id="addAccount" parameterType="Account" useGeneratedKeys="true" keyProperty="accountId" keyColumn="id">
+        INSERT INTO accounts (currency, acc_type, acc_name) VALUES (${currency.id}, ${typeId}, '${name}');
+    </insert>
+
+</mapper>

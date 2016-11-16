@@ -1,7 +1,9 @@
 package com.helper;
 
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.helper.resources.AccountResource;
 import com.helper.resources.CurrencyResource;
+import com.helper.service.AccountService;
 import com.helper.service.CurrencyService;
 import com.helper.util.MyBatisUtil;
 import io.dropwizard.Application;
@@ -35,11 +37,13 @@ public class HomeFinanceHelperApplication extends Application<HomeFinanceHelperC
         
         final SqlSessionFactory sessionFactory = MyBatisUtil.getSqlSessionFactory();
         final CurrencyService currencyService = new CurrencyService(sessionFactory);
+        final AccountService accountService = new AccountService(sessionFactory);
         
         /*
         *Add resources
          */
         environment.jersey().register(new CurrencyResource(currencyService));
+        environment.jersey().register(new AccountResource(accountService));
     
     }
 
