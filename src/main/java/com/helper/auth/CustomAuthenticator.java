@@ -4,6 +4,7 @@ import com.helper.core.Token;
 import com.helper.core.User;
 import com.helper.db.TokenDao;
 import com.helper.db.UserDao;
+import com.helper.service.UserService;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -16,11 +17,11 @@ import java.util.Optional;
 public class CustomAuthenticator implements Authenticator<CustomCredentials, CustomAuthUser>{
     
     private TokenDao tokenDao; //TODO: change to service layer
-    private UserDao userDao;
+    private UserService userService;
     
-    public CustomAuthenticator (TokenDao tokenDao, UserDao userDao) {
+    public CustomAuthenticator (TokenDao tokenDao, UserService userService) {
         this.tokenDao = tokenDao;
-        this.userDao = userDao;
+        this.userService = userService;
     }
     
     @Override
@@ -29,10 +30,10 @@ public class CustomAuthenticator implements Authenticator<CustomCredentials, Cus
         
         CustomAuthUser authenticatedUser = null;
         
-        Optional<User> user = userDao.getUser(customCredentials.getUserId());
+        User user = userService.getUser(customCredentials.getUserId());
     
-        if (user.isPresent()) {
-            Optional<Token> tokenOptional = tokenDao.findTokenForUser(user.get());
+        /*if (user != null) {
+            Optional<Token> tokenOptional = tokenDao.findTokenForUser(user);
     
             if (tokenOptional.isPresent()) {
                 Token token = tokenOptional.get();
@@ -43,6 +44,7 @@ public class CustomAuthenticator implements Authenticator<CustomCredentials, Cus
             }
         }
         
-        return Optional.ofNullable(authenticatedUser);
+        return Optional.ofNullable(authenticatedUser);*/
+        return null;
     }
 }

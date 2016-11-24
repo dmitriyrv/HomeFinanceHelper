@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.helper.db.UserDao">
+
+    <resultMap id="UserResult" type="User">
+        <id property="userId" column="id" />
+        <result property="email" column="email"/>
+        <result property="firstName" column="firstName"/>
+        <result property="lastName" column="lastName"/>
+        <result property="password" column="password"/>
+
+    </resultMap>
+
+    <insert id = "createUser" parameterType = "User" useGeneratedKeys="true" keyProperty="userId" keyColumn="id">
+        INSERT INTO user (email, firstName, lastName, password) VALUES (#{email},#{firstName},#{lastName},#{password});
+        <selectKey resultType="int" order="AFTER" keyProperty="userId">
+            SELECT LAST_INSERT_ID() as id
+        </selectKey>
+    </insert>
+
+    <select id="getUser" parameterType="int" resultMap="UserResult">
+        SELECT id, email, firstName, lastName, password FROM users WHERE id = #{userId};
+    </select>
+
+</mapper>

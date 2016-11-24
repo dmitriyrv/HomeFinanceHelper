@@ -7,6 +7,10 @@
     <typeAliases>
         <typeAlias alias = "Currency" type = "com.helper.core.Currency"/>
         <typeAlias alias = "Account" type = "com.helper.core.Account"/>
+        <typeAlias alias = "User" type = "com.helper.core.User"/>
+        <typeAlias alias = "Token" type = "com.helper.core.Token"/>
+        <typeAlias alias = "UUID" type = "java.util.UUID"/>
+
     </typeAliases>
 
     <environments default = "dev">
@@ -26,6 +30,8 @@
     <mappers>
         <mapper resource = "MyBatisMappers/CurrencyMapper.xml"/>
         <mapper resource = "MyBatisMappers/AccountMapper.xml"/>
+        <mapper resource = "MyBatisMappers/UserMapper.xml"/>
+        <mapper resource = "MyBatisMappers/TokenMapper.xml"/>
     </mappers>
 
 </configuration>

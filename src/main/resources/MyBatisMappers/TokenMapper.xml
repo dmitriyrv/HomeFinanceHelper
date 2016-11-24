@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.helper.db.TokenDao">
+
+
+    <resultMap id="TokenResult" type="Token">
+
+        <id property="token" column="tokenId" javaType="java.util.UUID" jdbcType="VARCHAR"
+            typeHandler="com.helper.db.typehandlers.UuidTypeHandler"/>
+        <result property="userId" column="userId" javaType="int"/>
+        <result property="lastAccess" column="lastAccess" javaType="org.joda.time.DateTime" typeHandler="com.helper.db.typehandlers.LocalDateTimeTypeHandler"/>
+
+    </resultMap>
+
+
+
+    <select id="findAccessTokenById" parameterType="java.lang.String" resultMap="TokenResult">
+        SELECT tokenId, userId, lastAccess FROM token WHERE tokenId = #{accessToken};
+    </select>
+
+    <insert id="generateNewAccessToken" parameterType="Token">
+        INSERT INTO token (tokenId, userId, lastAccess) VALUES ('${token}', ${userId}, '${lastAccess}');
+    </insert>
+
+
+
+</mapper>

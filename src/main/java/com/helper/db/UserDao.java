@@ -8,5 +8,7 @@ import java.util.Optional;
  * Created by dvas on 16.11.2016.
  */
 public interface UserDao {
-    Optional<User> getUser (Integer userId);
+    User getUser (Integer userId);
+    User createUser(User newUser);
+    Optional<User> findUserByNameAndPassword(String name, String password);
 }

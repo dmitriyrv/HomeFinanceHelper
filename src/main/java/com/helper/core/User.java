@@ -1,13 +1,17 @@
 package com.helper.core;
 
+import javax.security.auth.Subject;
+import java.security.Principal;
+
 /**
  * Created by dvas on 16.11.2016.
  */
-public class User {
+public class User implements Principal {
     private Integer userId;
     private String email;
     private String firstName;
     private String lastName;
+    private String password;
     
     public User () {
     }
@@ -51,6 +55,14 @@ public class User {
         this.lastName = lastName;
     }
     
+    public String getPassword () {
+        return password;
+    }
+    
+    public void setPassword (String password) {
+        this.password = password;
+    }
+    
     @Override
     public boolean equals (Object o) {
         if (this == o) return true;
@@ -73,4 +85,16 @@ public class User {
         result = 31 * result + lastName.hashCode();
         return result;
     }
+    
+    @Override
+    public String getName () {
+        return email;
+    }
+    
+    @Override
+    public boolean implies (Subject subject) {
+        return false;
+    }
+    
+    
 }

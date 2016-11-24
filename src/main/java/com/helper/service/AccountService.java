@@ -28,7 +28,7 @@ public class AccountService {
             AccountDao accountDao = sqlSession.getMapper(AccountDao.class);
             accountDao.addAccount(newAccount);
             sqlSession.commit();
-            return newAccount;
+            return this.getAccount(newAccount.getAccountId());
         } finally {
             sqlSession.close();
         }

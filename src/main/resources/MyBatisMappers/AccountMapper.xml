@@ -10,7 +10,7 @@
         <result property="typeId" column="acc_type"/>
         <result property="name" column="acc_name"/>
         <association property="currency" javaType="Currency">
-            <id property="id" column="id"/>
+            <id property="id" column="currency_id"/>
             <result property="userId" column="user_id"/>
             <result property="shortName" column="short_name"/>
             <result property="fullName" column="full_name"/>
@@ -20,9 +20,9 @@
     </resultMap>
 
     <select id="getAccountById" parameterType="int" resultMap="AccountResult">
-        SELECT a.id, a.type, a.name, c.id, c.user_id, c.short_name, c.full_name, c.primary_curr_id, c.rate_to_primary
+        SELECT a.id, a.acc_type, a.acc_name, c.currency_id, c.user_id, c.short_name, c.full_name, c.primary_curr_id, c.rate_to_primary
         FROM accounts as a
-        LEFT JOIN currencies as c ON a.currency = c.id
+        LEFT JOIN currencies as c ON a.currency = c.currency_id
         WHERE a.id = #{id};
     </select>
 

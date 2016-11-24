@@ -2,7 +2,6 @@ package com.helper.service;
 
 import com.helper.core.Currency;
 import com.helper.db.CurrencyDao;
-import com.helper.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
